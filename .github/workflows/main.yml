@@ -1,31 +1,33 @@
-name: Build and Deploy Website
+name: Deploy Static Website
 
 on:
   push:
     branches:
-      - main  # Change this if you're using a different branch
+      - main  # Change if your default branch is different
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Install Dependencies
+      working-directory: nexus-software
+      run: npm install
 
-      - name: Build Project
-        run: npm run build
+    - name: Build Project (No Build Required)
+      working-directory: nexus-software
+      run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # or ./build if your build output goes there
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./nexus-software  # this is your root folder
