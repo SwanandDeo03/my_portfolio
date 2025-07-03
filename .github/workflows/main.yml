@@ -3,7 +3,7 @@ name: Deploy Static Website
 on:
   push:
     branches:
-      - main  # Change if your default branch is different
+      - main
 
 jobs:
   deploy:
@@ -19,15 +19,13 @@ jobs:
         node-version: '18'
 
     - name: Install Dependencies
-      working-directory: nexus-software
       run: npm install
 
     - name: Build Project (No Build Required)
-      working-directory: nexus-software
       run: npm run build
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./nexus-software  # this is your root folder
+        publish_dir: .  # current directory
