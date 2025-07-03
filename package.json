@@ -1,0 +1,11 @@
+{
+  "name": "nexus-software",
+  "version": "1.0.0",
+  "description": "Static Node.js site using Express",
+  "scripts": {
+    "build": "echo 'No build needed for static site'"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
